@@ -137,6 +137,52 @@ local function zoomWindow(scalingFactor)
     end
 end
 
+local function moveSpliter(offset)
+    local currentWindow = hs.window.focusedWindow()
+    local wf = currentWindow:frame()
+    local sf = currentWindow:screen():frame()
+    local actualOffset = offset * sf.w
+    if wf.x > 10 then
+        actualOffset = -actualOffset
+    end
+    local nf = {
+        x = wf.x,
+        y = wf.y,
+        w = wf.w + actualOffset,
+        h = wf.h
+    }
+    currentWindow:setFrame(nf, 0)
+end
+
+local cmdControlHHandler = function()
+    local currentWindow = hs.window.focusedWindow()
+    if currentWindow:isFullScreen() then
+        moveSpliter(-0.05)
+    else
+        snapLeft()
+    end
+end
+local cmdControlHHoldHandler = function()
+    local currentWindow = hs.window.focusedWindow()
+    if currentWindow:isFullScreen() then
+        moveSpliter(-0.01)
+    end
+end
+local cmdControlLHandler = function()
+    local currentWindow = hs.window.focusedWindow()
+    if currentWindow:isFullScreen() then
+        moveSpliter(0.05)
+    else
+        snapLeft()
+    end
+end
+local cmdControlLHoldHandler = function()
+    local currentWindow = hs.window.focusedWindow()
+    if currentWindow:isFullScreen() then
+        moveSpliter(0.01)
+    end
+end
+
 local mm = require("mm")
 
 local moduleId = "wm"
@@ -168,8 +214,8 @@ end
 hs.modules[moduleId].hotKeys = {
     hs.hotkey.new({ "cmd", "control" }, "c", centerWindow),
 
-    hs.hotkey.new({ "cmd", "control" }, "h", snapLeft),
-    hs.hotkey.new({ "cmd", "control" }, "l", snapRight),
+    hs.hotkey.new({ "cmd", "control" }, "h", cmdControlHHandler, nil, cmdControlHHoldHandler),
+    hs.hotkey.new({ "cmd", "control" }, "l", cmdControlLHandler, nil, cmdControlLHoldHandler),
 
     hs.hotkey.new({ "cmd", "control" }, "j", switchToWindowRight),
     hs.hotkey.new({ "cmd", "control" }, "k", switchToWindowLeft),
