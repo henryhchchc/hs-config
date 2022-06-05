@@ -142,7 +142,7 @@ local function moveSpliter(offset)
     local wf = currentWindow:frame()
     local sf = currentWindow:screen():frame()
     local actualOffset = offset * sf.w
-    if wf.x > 10 then
+    if (wf.x - sf.x) > 2 then
         actualOffset = -actualOffset
     end
     local nf = {
@@ -173,7 +173,7 @@ local cmdControlLHandler = function()
     if currentWindow:isFullScreen() then
         moveSpliter(0.05)
     else
-        snapLeft()
+        snapRight()
     end
 end
 local cmdControlLHoldHandler = function()
