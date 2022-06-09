@@ -154,6 +154,16 @@ local function moveSpliter(offset)
     currentWindow:setFrame(nf, 0)
 end
 
+local function equalizeSplitWindows()
+    local currentWindow = hs.window.focusedWindow()
+    local wf = currentWindow:frame()
+    local sf = currentWindow:screen():frame()
+    if currentWindow:isFullScreen() and (wf.w < sf.w - 10) then
+        local nf = { x = wf.x, y = wf.y, h = sf.h, w = sf.w / 2 }
+        currentWindow:setFrame(nf, 0)
+    end
+end
+
 local cmdControlHHandler = function()
     local currentWindow = hs.window.focusedWindow()
     if currentWindow:isFullScreen() then
@@ -222,8 +232,10 @@ hs.modules[moduleId].hotKeys = {
 
     hs.hotkey.new({ "cmd", "control" }, "n", almostMaximize),
     hs.hotkey.new({ "cmd", "control" }, "m", toggleMaximize),
-    hs.hotkey.new({ "cmd", "control" }, "-", zoomWindow(0.9), nil, zoomWindow(0.95)),
-    hs.hotkey.new({ "cmd", "control" }, "=", zoomWindow(1.1), nil, zoomWindow(1.05)),
+    hs.hotkey.new({ "cmd", "control" }, "=", equalizeSplitWindows),
+
+    hs.hotkey.new({ "cmd", "control", "shift" }, "-", zoomWindow(0.9), nil, zoomWindow(0.95)),
+    hs.hotkey.new({ "cmd", "control", "shift" }, "=", zoomWindow(1.1), nil, zoomWindow(1.05)),
 
     hs.hotkey.new({ "cmd", "control", "shift" }, "h", moveToScreenLeft),
     hs.hotkey.new({ "cmd", "control", "shift" }, "j", moveToScreenDown),
