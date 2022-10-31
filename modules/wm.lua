@@ -55,9 +55,10 @@ local function highlightWindow(w)
     local wf = { x = 0, y = 0, w = w:frame().w, h = w:frame().h }
     local radii = w:isFullScreen() and { xRadius = 0, yRadius = 0 } or { xRadius = 10, yRadius = 10 }
     local frameThickness = 5
-    local frameColor = { red = 98 / 255, green = 197 / 255, blue = 84 / 255 }
+    local frameColor = hs.drawing.color.colorsFor("System").controlAccentColor
     c:appendElements(
-        { type = "rectangle", action = "build", roundedRectRadii = radii, reversePath = true, padding = frameThickness, },
+        { type = "rectangle", action = "build", roundedRectRadii = radii, reversePath = true, padding = frameThickness, }
+        ,
         { type = "rectangle", action = "clip", frame = wf, roundedRectRadii = radii, },
         { type = "rectangle", action = "fill", frame = wf, roundedRectRadii = radii, fillColor = frameColor, }
     )
