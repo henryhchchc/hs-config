@@ -29,11 +29,6 @@ function M.setup()
                 image = sfSymbol.loadForMenu("􀥭 "),
                 menu = featuresSubMenu
             },
-            {
-                title = "Terminal",
-                image = sfSymbol.loadForMenu("􀩼 "),
-                fn = require("modules.terminal").startOrFocusTerminal,
-            },
             { title = "-" },
             {
                 title = "Generate LSP Annotations",
