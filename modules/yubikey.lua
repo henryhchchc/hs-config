@@ -9,8 +9,8 @@ local function usbDeviceCallback(event)
                 informativeText = productName .. " is connected."
             }):send()
         elseif eventType == "removed" then
-            local isShiftHold = hs.eventtap.checkKeyboardModifiers()["shift"]
-            if isShiftHold then
+            local isOptionHold = hs.eventtap.checkKeyboardModifiers()["alt"]
+            if isOptionHold then
                 hs.notify.new({
                     title = "YubiKey 🔑",
                     autoWithdraw = true,
