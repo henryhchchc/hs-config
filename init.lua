@@ -4,7 +4,8 @@ require("mm")
 Modules = {
     require("modules.reload"),
     require("modules.wm"),
-    require("modules.yubikey")
+    require("modules.yubikey"),
+    require("modules.term")
 }
 
 hs.fnutils.each(Modules, function(m) m.load() end)
