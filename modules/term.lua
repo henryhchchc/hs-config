@@ -1,5 +1,5 @@
 local function launch_term()
-    hs.application.launchOrFocus("kitty")
+    hs.application.launchOrFocus("WezTerm")
 end
 
 local mm = require("mm")
