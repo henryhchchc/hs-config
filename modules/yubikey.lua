@@ -18,8 +18,15 @@ local function usbDeviceCallback(event)
                 }):send()
             else
                 hs.caffeinate.lockScreen()
+        hs.timer.doAfter(1.0, function ()
+          local devices = hs.usb.attachedDevices()
+          for i = 1, #devices do
+            if devices[i].productName == productName then
+              return
             end
-        end
+          end
+          hs.caffeinate.lockScreen()
+        end)
     end
 end
 
