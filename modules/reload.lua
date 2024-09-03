@@ -24,7 +24,7 @@ end
 local M = {
   id = moduleId,
   name = "Auto Config Reload",
-  icon = "􀊯 ",
+  icon = "􁐂 ",
 }
 
 hs.modules[moduleId] = mm.define(M)
